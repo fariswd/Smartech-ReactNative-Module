@@ -17,7 +17,8 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.netcore.android.Smartech;
 import com.netcore.android.inapp.InAppCustomHTMLListener;
-import com.netcore.android.notification.SMTNotificationClickListener;
+import com.netcore.android.smartechpush.SmartPush;
+import com.netcore.android.smartechpush.notification.SMTNotificationClickListener;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,6 +35,7 @@ public class SmartechReactNativeModule extends ReactContextBaseJavaModule implem
     private final ReactApplicationContext reactContext;
     private static final String TAG = SmartechReactNativeModule.class.getSimpleName();
     private Smartech smartech = null;
+    private SmartPush smartpush = null;
     public static Intent mIntent = null;
     private static final String MODULE_NAME = "SmartechReactNative";
     private static final String SmartechDeeplinkNotification = "SmartechDeeplinkNotification";
@@ -62,7 +64,8 @@ public class SmartechReactNativeModule extends ReactContextBaseJavaModule implem
     private void initSDK() {
         if (smartech == null) {
             smartech = Smartech.getInstance(new WeakReference<Context>(this.reactContext));
-            smartech.setSMTNotificationClickListener(this);
+            smartpush = SmartPush.getInstance(new WeakReference<Context>(this.reactContext));
+            smartpush.setSMTNotificationClickListener(this);
         }
     }
 
@@ -278,7 +281,7 @@ public class SmartechReactNativeModule extends ReactContextBaseJavaModule implem
     @ReactMethod
     public void optPushNotification(Boolean value) {
         try {
-            smartech.optPushNotification(value);
+            smartpush.optPushNotification(value);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -288,7 +291,7 @@ public class SmartechReactNativeModule extends ReactContextBaseJavaModule implem
     @ReactMethod
     public void hasOptedPushNotification(Callback callback) {
         try {
-            Boolean isPushNotificationOpted = smartech.hasOptedPushNotification();
+            Boolean isPushNotificationOpted = smartpush.hasOptedPushNotification();
             callbackHandler(callback, isPushNotificationOpted);
         } catch (Exception e) {
             e.printStackTrace();
@@ -351,7 +354,7 @@ public class SmartechReactNativeModule extends ReactContextBaseJavaModule implem
     @ReactMethod
     public void getDevicePushToken(Callback callback) {
         try {
-            String token = smartech.getDevicePushToken();
+            String token = smartpush.getDevicePushToken();
             callbackHandler(callback, token);
         } catch (Exception e) {
             e.printStackTrace();
@@ -387,7 +390,7 @@ public class SmartechReactNativeModule extends ReactContextBaseJavaModule implem
     @ReactMethod
     public void setDevicePushToken(String token) {
         try {
-            smartech.setDevicePushToken(token);
+            smartpush.setDevicePushToken(token);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -397,7 +400,7 @@ public class SmartechReactNativeModule extends ReactContextBaseJavaModule implem
     @ReactMethod
     public void fetchAlreadyGeneratedTokenFromFCM() {
         try {
-            smartech.fetchAlreadyGeneratedTokenFromFCM();
+            smartpush.fetchAlreadyGeneratedTokenFromFCM();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -18,5 +18,6 @@ Pod::Spec.new do |s|
 
   s.dependency "React"
   s.dependency "Smartech-iOS-SDK"
+  s.dependency "SmartPush-iOS-SDK"
 end
 

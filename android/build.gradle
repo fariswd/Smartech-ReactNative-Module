@@ -69,7 +69,8 @@ repositories {
 dependencies {
     //noinspection GradleDynamicVersion
     implementation 'com.facebook.react:react-native:+'  // From node_modules
-    api 'com.netcore.android:smartech-sdk:3.1.7'
+    api 'com.netcore.android:smartech-sdk:3.2.7'
+    api 'com.netcore.android:smartech-push:3.2.3'
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.61'
     implementation "androidx.work:work-runtime-ktx:2.3.3"
 }
@@ -93,12 +94,12 @@ def configureReactNativePom(def pom) {
             }
         }
 
-        developers {
-            developer {
-                id packageJson.author.username
-                name packageJson.author.name
-            }
-        }
+//        developers {
+//            developer {
+//                id packageJson.author.username
+//                name packageJson.author.name
+//            }
+//        }
     }
 }
 

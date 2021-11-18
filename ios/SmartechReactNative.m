@@ -6,6 +6,7 @@
 
 #import "SmartechReactNative.h"
 #import <Smartech/Smartech.h>
+#import <SmartPush/SmartPush.h>
 #import <CoreLocation/CoreLocation.h>
 #import <React/RCTLog.h>
 
@@ -144,7 +145,7 @@ RCT_EXPORT_METHOD(hasOptedTracking) {
  */
 RCT_EXPORT_METHOD(optPushNotification:(BOOL)isOpted) {
     RCTLogInfo(@"[Smartech optPushNotification]");
-    [[Smartech sharedInstance] optPushNotification:isOpted];
+    [[SmartPush sharedInstance] optPushNotification:isOpted];
 }
 
 /**
@@ -154,7 +155,7 @@ RCT_EXPORT_METHOD(optPushNotification:(BOOL)isOpted) {
  */
 RCT_EXPORT_METHOD(hasOptedPushNotification) {
     RCTLogInfo(@"[Smartech hasOptedPushNotification]");
-    [[Smartech sharedInstance] hasOptedPushNotification];
+    [[SmartPush sharedInstance] hasOptedPushNotification];
 }
 
 /**
